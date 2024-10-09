@@ -14,12 +14,12 @@ navigate('/');
 
 
   return (
-    <nav className='py-3 shadow-nav-shadow'>
+    <nav className='py-3 shadow-nav-shadow bg-blue-900'>
         <Container>
         
 
         <div className="wrapper flex items-center justify-between">
-            <p className='font-bold text-3xl'>CodeTogether</p>
+            <p className='font-bold text-3xl'>StudyLab</p>
             <div className=" space-x-3">
 
             <button
