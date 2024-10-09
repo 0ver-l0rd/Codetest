@@ -19,7 +19,7 @@ navigate('/');
         
 
         <div className="wrapper flex items-center justify-between">
-            <p className='font-bold text-3xl'>CodeTogether</p>
+            <p className='font-bold text-3xl'>StudySphere</p>
             <div className=" space-x-3">
 
             <button

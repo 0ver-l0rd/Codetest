@@ -4,4 +4,13 @@ import react from '@vitejs/plugin-react'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
+  server: {
+    proxy: {
+      '/socket.io': {
+        target: 'https://realtime-code-editor-2wsn.onrender.com',
+        changeOrigin: true,
+        ws: true,
+      },
+    },
+  },
 })
