@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/socket.io': {
-        target: 'https://realtime-code-editor-2wsn.onrender.com',
+        target: 'http://localhost:3001', // Update this to your actual backend URL
         changeOrigin: true,
         ws: true,
       },
