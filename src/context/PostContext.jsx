@@ -16,7 +16,7 @@ const socket = io(SOCKET_SERVER_URL, {
 
 export const PostContextProvider = ({ children }) => {
     const [code, setCode] = useState("");
-    const [joinedUsers, setJoinedUsers] = useState([]);
+    const [joinedUsers, setJoinedUsers] = useState([]); // Initialize as an empty array
     const [selectedLanguage, setSelectedLanguage] = useState(null);
     const [isConnected, setIsConnected] = useState(socket.connected);
 
@@ -43,10 +43,33 @@ export const PostContextProvider = ({ children }) => {
         socket.on('disconnect', handleDisconnect);
         socket.on('connect_error', handleConnectError);
 
-        // Add more event listeners for debugging
         socket.on('error', (error) => console.error('Socket error:', error));
         socket.on('reconnect', (attemptNumber) => console.log('Socket reconnected after', attemptNumber, 'attempts'));
         socket.on('reconnect_error', (error) => console.error('Socket reconnection error:', error));
+
+        // Handle room users update
+        socket.on('room users', (users) => {
+            console.log('Room users updated:', users);
+            setJoinedUsers(users || []); // Ensure we always set an array
+        });
+
+        // Handle user joined event
+        socket.on('user joined', (user) => {
+            console.log('User joined:', user);
+            if (user && user.name) {
+                toast.success(`${user.name} joined the room`);
+                setJoinedUsers(prevUsers => [...prevUsers, user]);
+            }
+        });
+
+        // Handle user left event
+        socket.on('user left', (user) => {
+            console.log('User left:', user);
+            if (user && user.name) {
+                toast.error(`${user.name} left the room`);
+                setJoinedUsers(prevUsers => prevUsers.filter(u => u.id !== user.id));
+            }
+        });
 
         return () => {
             socket.off('connect', handleConnect);
@@ -55,6 +78,9 @@ export const PostContextProvider = ({ children }) => {
             socket.off('error');
             socket.off('reconnect');
             socket.off('reconnect_error');
+            socket.off('room users');
+            socket.off('user joined');
+            socket.off('user left');
         };
     }, [handleConnect, handleDisconnect, handleConnectError]);
 

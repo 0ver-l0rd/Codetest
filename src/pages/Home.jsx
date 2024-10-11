@@ -28,18 +28,10 @@ function Home() {
         uuid: params.id,
         name: location.state,
       });
-      socket.on('room users', (users) => {
-        console.log('Users in room:', users);
-        // Update your state or UI with the users list
-      });
     } else {
       console.log('Not connected to server. Cannot join room.');
       toast.error("Not connected to the server. Please wait or refresh the page.");
     }
-
-    return () => {
-      socket.off('room users');
-    };
   }, [isConnected, socket, params.id, location.state]);
 
   return (

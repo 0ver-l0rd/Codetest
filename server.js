@@ -22,6 +22,21 @@ app.use(cors({
     : ['http://localhost:5173', 'https://musical-khapse-5244f7.netlify.app']
 }));
 
+// Function to get all users in a room
+const getUsersInRoom = (room) => {
+  const users = [];
+  const sockets = io.sockets.adapter.rooms.get(room);
+  if (sockets) {
+    for (const socketId of sockets) {
+      const socket = io.sockets.sockets.get(socketId);
+      if (socket && socket.data.name) {
+        users.push({ id: socketId, name: socket.data.name });
+      }
+    }
+  }
+  return users;
+};
+
 // Socket.IO event handlers
 io.on('connection', (socket) => {
   console.log('A user connected', socket.id);
@@ -33,17 +48,17 @@ io.on('connection', (socket) => {
   socket.on('join room', (data) => {
     const { uuid, name } = data;
     socket.join(uuid);
+    socket.data.name = name; // Store the user's name
     console.log(`${name} (${socket.id}) joined room ${uuid}`);
     
-    // Notify other users in the room
-    socket.to(uuid).emit('user joined', { name });
-    
-    // Send the current users in the room to the newly joined user
-    const users = Array.from(io.sockets.adapter.rooms.get(uuid) || []).map(socketId => {
-      return io.sockets.sockets.get(socketId).data.name;
-    });
-    console.log(`Users in room ${uuid}:`, users);
-    socket.emit('room users', users);
+    // Get all users in the room
+    const users = getUsersInRoom(uuid);
+
+    // Notify all users in the room (including the new user) about the updated user list
+    io.in(uuid).emit('room users', users);
+
+    // Notify other users that a new user has joined
+    socket.to(uuid).emit('user joined', { id: socket.id, name });
   });
 
   socket.on('new input', (data) => {
@@ -57,7 +72,10 @@ io.on('connection', (socket) => {
     // Notify rooms that the user left
     socket.rooms.forEach((room) => {
       if (room !== socket.id) {
-        socket.to(room).emit('user left', socket.data.name);
+        io.in(room).emit('user left', { id: socket.id, name: socket.data.name });
+        // Send updated user list to remaining users
+        const users = getUsersInRoom(room);
+        io.in(room).emit('room users', users);
       }
     });
   });
