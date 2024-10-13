@@ -23,13 +23,7 @@ export const UsersDrawer = ({setOpenSideDrawer}) => {
    }
 
 
-const handleCopyToClipboard=async()=>{
-   navigator.clipboard.writeText(uid).then(function() {
-      toast.success('Copied to clipboard')
-    }, function(err) {
-      toast.error(err)
-    });
-}
+
 
 
 
