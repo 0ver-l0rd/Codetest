@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import {v4 as uid} from 'uuid'
+import { v4 as uuidv4 } from 'uuid'
 
 function Login() {
     const[name,setName]=useState("")
@@ -10,7 +10,9 @@ function Login() {
 
 
 const generateUuid=()=>{
-    setUuid(uid)
+    const newUuid = uuidv4();
+    console.log('Generated UUID:', newUuid);
+    setUuid(newUuid);
 }
 
 const handleLogin=(e)=>{
