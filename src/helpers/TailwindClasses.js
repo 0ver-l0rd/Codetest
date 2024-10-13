@@ -1,6 +1,6 @@
 const BlueGradient=()=>{
     return (
-        "text-white bg-gradient-to-br from-purple-600 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-semibold rounded-lg text-2xl px-9 py-4 text-center mr-2 mb-2 "
+        "text-white bg-custom-dark-blue focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 font-semibold rounded-lg text-2xl px-9 py-4 text-center mr-2 mb-2 "
     )
 }
 const BlueGradientOutlined=()=>{

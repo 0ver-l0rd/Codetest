@@ -26,11 +26,11 @@ const handleCopyToClipboard=async()=>{
 
   return (
     <>
-    <div className='w-screen h-[100vh] fixed bg-drawer-overlay top-0'>
-      <div className="box h-screen w-[350px] bg-white p-3 relative">
+    <div className='w-screen h-[100vh] fixed bg-drawer-overlay text-white  top-0'>
+      <div className="box h-screen w-[350px]  bg-custom-dark-blue  p-3 relative">
          <XMarkIcon onClick={()=>setOpenSideDrawer(false)} className='w-11 h-11 absolute right-7 cursor-pointer'/>
          <h3 className='font-semibold text-3xl'>Connected Users</h3>
-         <div className="box mt-7 flex flex-wrap gap-7 ">
+         <div className="box mt-7 flex flex-wrap gap-7  ">
          {joinedUsers?.map(user=>
                <div key={user.id} className="box grid place-items-center w-fit">
                <Avatar name={user.name}/>
@@ -41,7 +41,7 @@ const handleCopyToClipboard=async()=>{
          </div>
       <div className="absolute  bottom-10">
          <p className='font-bold text-2xl'>Invite users by sharing this 👇 </p>
-      <div onClick={handleCopyToClipboard} className=" bg-[#F5F4F6] flex items-center gap-x-4 p-3 py-5 cursor-pointer">
+      <div onClick={handleCopyToClipboard} className=" bg-black flex items-center gap-x-4 p-3 py-5 cursor-pointer">
             <p className='text-xl     whitespace-nowrap'>ff1efde0-2eba-4320-bdf2-5b0cd03c1114</p>
             <ClipboardIcon  className='w-8 h-8 '/>
          </div>

@@ -11,8 +11,12 @@ module.exports = {
       },
       backgroundColor:{
         "drawer-overlay":"rgba(0,0,0,.6)"
-      }
+      },
+      colors: {
+        'custom-dark-blue': '#0c1227',
+      },
     },
   },
+  
   plugins: [],
 }
