@@ -22,7 +22,6 @@ export const UsersDrawer = ({setOpenSideDrawer}) => {
        });
    }
 
-<<<<<<< HEAD
 
 const handleCopyToClipboard=async()=>{
    navigator.clipboard.writeText(uid).then(function() {
@@ -70,47 +69,4 @@ const handleCopyToClipboard=async()=>{
     />
     </>
   )
-=======
-   return (
-     <>
-     <div className='w-screen h-[100vh] fixed bg-drawer-overlay top-0'>
-       <div className="box h-screen w-[350px] bg-white p-3 relative">
-          <XMarkIcon onClick={()=>setOpenSideDrawer(false)} className='w-11 h-11 absolute right-7 cursor-pointer'/>
-          <h3 className='font-semibold text-3xl'>Connected Users</h3>
-          <div className="box mt-7 flex flex-col gap-4">
-          {joinedUsers && joinedUsers.length > 0 ? (
-            joinedUsers.map(user => (
-              user && user.name ? (
-                <div key={user.id} className="flex items-center gap-3">
-                  <Avatar name={user.name} />
-                  <p className='font-semibold text-xl'>{user.name}</p>
-                </div>
-              ) : null
-            ))
-          ) : (
-            <p>No users connected</p>
-          )}
-          </div>
-       <div className="absolute bottom-10">
-          <p className='font-bold text-2xl'>Invite users by sharing this 👇 </p>
-       <div onClick={handleCopyToClipboard} className="bg-[#F5F4F6] flex items-center gap-x-4 p-3 py-5 cursor-pointer">
-             <p className='text-xl whitespace-nowrap'>{uid}</p>
-             <ClipboardIcon className='w-8 h-8' />
-          </div>
-       </div>
-       </div>
-     </div>
-     <Toaster
-     position='top-right'
-     toastOptions={{
-       duration:2000,
-       style:{
-          fontSize:15,
-          padding:'15px 12px'
-       }
-     }}
-     />
-     </>
-   )
->>>>>>> d1e08ace9d517601c0f5231c6a45305b8473d698
 }

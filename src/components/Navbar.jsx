@@ -19,11 +19,7 @@ navigate('/');
         
 
         <div className="wrapper flex items-center justify-between">
-<<<<<<< HEAD
           <img src="logo.png"  width="100px"	 height="100px"  />
-=======
-            <p className='font-bold text-3xl'>StudySphere</p>
->>>>>>> d1e08ace9d517601c0f5231c6a45305b8473d698
             <div className=" space-x-3">
 
             <button
