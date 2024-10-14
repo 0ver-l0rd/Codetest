@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/socket.io': {
-        target: 'http://localhost:3001', // Update this to your actual backend URL
+        target: 'http://localhost:10000', // Update this to your actual backend URL
         changeOrigin: true,
         ws: true,
       },
